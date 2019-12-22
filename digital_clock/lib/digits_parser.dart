@@ -37,7 +37,8 @@ class Character {
         (index) => MapEntry(
           letterMap[index],
           Character.fromMatrix(
-            rows.sublist(index * characterHeight, index++ * characterHeight),
+            rows.sublist(
+                index * characterHeight, (index + 1) * characterHeight),
             pixelCharacter,
           ),
         ),

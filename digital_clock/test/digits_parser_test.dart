@@ -6,6 +6,13 @@ main() {
 
   test("Hejsan", () async {
     final digits = await DigitsParser().getDigits();
-    print(digits);
+    digits.forEach((actual, digit) {
+      print(actual);
+      digit.pixelPlacement.forEach((e) {
+        final row = e.map((bool) => bool ? "#" : " ");
+        print(row);
+      });
+      print("");
+    });
   });
 }
