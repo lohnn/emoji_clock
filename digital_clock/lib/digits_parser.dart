@@ -1,13 +1,18 @@
 import 'package:characters/characters.dart';
-import 'package:flutter/services.dart';
 
 class DigitsParser {
-  Future<Map<String, Character>> getDigits() async {
-    final digits = await rootBundle.loadString("assets/digits");
+  Map<String, Character> _digits;
+
+  DigitsParser() {
+//    final digits = await rootBundle.loadString("assets/digits");
     final newLinePos = digits.indexOf("\n");
     final letterMap = digits.substring(0, newLinePos);
     final pixelMap = digits.substring(newLinePos + 1);
-    return Character.parseDigitMatrix(letterMap, pixelMap);
+    _digits = Character.parseDigitMatrix(letterMap, pixelMap);
+  }
+
+  Character charOf(String char) {
+    return _digits[char];
   }
 }
 
@@ -56,3 +61,82 @@ class Character {
     );
   }
 }
+
+const digits = """0123456789:
+ ###
+#   #
+#   #
+#   #
+#   #
+#   #
+ ###
+  #
+###
+  #
+  #
+  #
+  #
+#####
+ ###
+#   #
+   #
+  #
+ #
+#
+#####
+ ###
+#   #
+    #
+  ##
+    #
+#   #
+ ###
+#
+#
+#
+# #
+#####
+  #
+  #
+#####
+#
+#
+####
+    #
+    #
+####
+ ###
+#   #
+#
+####
+#   #
+#   #
+ ###
+#####
+    #
+   #
+  #
+  #
+  #
+  #
+ ###
+#   #
+#   #
+ ###
+#   #
+#   #
+ ###
+ ###
+#   #
+#   #
+ ####
+    #
+#   #
+ ###
+
+
+  #
+
+  #
+
+""";

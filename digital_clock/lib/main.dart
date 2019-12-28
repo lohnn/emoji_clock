@@ -4,10 +4,13 @@
 
 import 'dart:io';
 
+import 'package:digital_clock/digits_parser.dart';
+import 'package:digital_clock/emojis.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/customizer.dart';
 import 'package:flutter_clock_helper/model.dart';
+import 'package:provider/provider.dart';
 
 import 'digital_clock.dart';
 
@@ -31,6 +34,12 @@ void main() {
 class ClockApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ClockCustomizer((ClockModel model) => DigitalClock(model));
+    return MultiProvider(
+      providers: <Provider>[
+        Provider<DigitsParser>(create: (_) => DigitsParser()),
+        Provider<Emojis>(create: (_) => Emojis()),
+      ],
+      child: ClockCustomizer((ClockModel model) => DigitalClock(model)),
+    );
   }
 }
