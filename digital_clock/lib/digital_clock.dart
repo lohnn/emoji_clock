@@ -5,12 +5,10 @@
 import 'dart:async';
 
 import 'package:digital_clock/emoji_text.dart';
-import 'package:digital_clock/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 enum _Element {
   background,
@@ -79,18 +77,18 @@ class _DigitalClockState extends State<DigitalClock> {
       _dateTime = DateTime.now();
       // Update once per minute. If you want to update every second, use the
       // following code.
-      _timer = Timer(
-        Duration(minutes: 1) -
-            Duration(seconds: _dateTime.second) -
-            Duration(milliseconds: _dateTime.millisecond),
-        _updateTime,
-      );
-      // Update once per second, but make sure to do it at the beginning of each
-      // new second, so that the clock is accurate.
 //      _timer = Timer(
-//        Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
+//        Duration(minutes: 1) -
+//            Duration(seconds: _dateTime.second) -
+//            Duration(milliseconds: _dateTime.millisecond),
 //        _updateTime,
 //      );
+      // Update once per second, but make sure to do it at the beginning of each
+      // new second, so that the clock is accurate.
+      _timer = Timer(
+        Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
+        _updateTime,
+      );
     });
   }
 
@@ -122,10 +120,14 @@ class _DigitalClockState extends State<DigitalClock> {
       child: Row(
         children: <Widget>[
           EmojiCharacter(hour.substring(0, 1), key: Key("hour1")),
+          const Padding(padding: EdgeInsets.only(left: 10)),
           EmojiCharacter(hour.substring(1, 2), key: Key("hour2")),
+          const Padding(padding: EdgeInsets.only(left: 10)),
           EmojiCharacter(":", key: Key("colon")),
-          EmojiCharacter(minute.substring(0, 1), key: Key("minute1")),
-          EmojiCharacter(minute.substring(1, 2), key: Key("minute2")),
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          EmojiCharacter(second.substring(0, 1), key: Key("minute1")),
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          EmojiCharacter(second.substring(1, 2), key: Key("minute2")),
         ],
       ),
     );
