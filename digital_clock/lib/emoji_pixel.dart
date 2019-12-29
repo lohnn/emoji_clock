@@ -12,11 +12,31 @@ class EmojiPixel extends StatefulWidget {
 }
 
 class _EmojiPixelState extends State<EmojiPixel> {
+  Emojis emojis;
+  String currentEmoji;
+  bool visible;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    emojis = Provider.of<Emojis>(context);
+    currentEmoji = emojis.emoji;
+    visible = widget.visible;
+  }
+
+  @override
+  void didUpdateWidget(EmojiPixel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    visible = widget.visible;
+    if (visible != oldWidget.visible) {
+      currentEmoji = emojis.emoji;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final emojis = Provider.of<Emojis>(context);
     return Container(
-      child: widget.visible ? FittedBox(child: Text(emojis.emoji)) : null,
+      child: widget.visible ? FittedBox(child: Text(currentEmoji)) : null,
     );
   }
 }
