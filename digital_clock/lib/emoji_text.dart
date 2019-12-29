@@ -1,5 +1,5 @@
 import 'package:digital_clock/digits_parser.dart';
-import 'package:digital_clock/emojis.dart';
+import 'package:digital_clock/emoji_pixel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,19 +37,15 @@ class _EmojiCharacterState extends State<EmojiCharacter> {
   Widget build(BuildContext context) => toRender;
 
   Widget createTree() {
-    final emojis = Provider.of<Emojis>(context);
     final character =
         Provider.of<DigitsParser>(context).charOf(widget.charString);
-    final temp = character.singleIterablePixelPlacement.map((pixel) {
-      return Container(
-        child: pixel ? FittedBox(child: Text(emojis.emoji)) : null,
-      );
-    }).toList();
     return Container(
       child: GridView.count(
         shrinkWrap: true,
-        crossAxisCount: 5,
-        children: temp,
+        crossAxisCount: character.width,
+        children: character.singleIterablePixelPlacement
+            .map((pixelVisibility) => EmojiPixel(pixelVisibility))
+            .toList(),
       ),
     );
   }

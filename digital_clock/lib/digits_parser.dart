@@ -17,6 +17,8 @@ class DigitsParser {
 class Character {
   final Iterable<Iterable<bool>> pixelPlacement;
 
+  int get width => pixelPlacement.elementAt(0).length;
+
   Iterable<bool> get singleIterablePixelPlacement =>
       pixelPlacement.expand((list) => list);
 
