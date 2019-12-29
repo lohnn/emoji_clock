@@ -1,5 +1,3 @@
-import 'package:characters/characters.dart';
-
 class DigitsParser {
   Map<String, Character> _digits;
 
@@ -25,7 +23,7 @@ class Character {
     String letterMap,
     String pixelMap, {
     String pixelCharacter = "#",
-    int characterWidth = 6,
+    int characterWidth = 5,
     int characterHeight = 7,
   }) {
     assert(pixelMap.isNotEmpty);
@@ -43,19 +41,36 @@ class Character {
           letterMap[index],
           Character.fromMatrix(
             rows.sublist(
-                index * characterHeight, (index + 1) * characterHeight),
+              index * characterHeight,
+              (index + 1) * characterHeight,
+            ),
             pixelCharacter,
+            characterWidth,
+            characterHeight,
           ),
         ),
       ),
     );
   }
 
-  factory Character.fromMatrix(List<String> sublist, String pixelCharacter) {
+  factory Character.fromMatrix(
+    List<String> characterPixels,
+    String pixelCharacter,
+    int characterWidth,
+    int characterHeight,
+  ) {
+    final pixelCharIndex = pixelCharacter.codeUnitAt(0);
     return Character._(
-      sublist.map(
-        (row) => row.characters.map(
-          (column) => column == "#",
+      List.generate(
+        characterHeight,
+        (y) => List.generate(
+          characterWidth,
+          (x) {
+            final pixelRow = characterPixels[y];
+            return x >= pixelRow.length
+                ? false
+                : pixelRow.codeUnitAt(x) == pixelCharIndex;
+          },
         ),
       ),
     );
