@@ -41,30 +41,18 @@ class _EmojiCharacterState extends State<EmojiCharacter> {
     final emojis = Provider.of<Emojis>(context);
     final character =
         Provider.of<DigitsParser>(context).charOf(widget.charString);
+    final temp = character.singleIterablePixelPlacement.map((pixel) {
+      return Container(
+        height: EmojiCharacter._size,
+        width: EmojiCharacter._size,
+        child: pixel ? FittedBox(child: Text(emojis.emoji)) : null,
+      );
+    }).toList();
     return Container(
-      width: EmojiCharacter._size * 5.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: character.pixelPlacement.map(
-          (row) {
-            if (row.isEmpty) {
-              return Container(
-                width: EmojiCharacter._size,
-                height: EmojiCharacter._size,
-              );
-            }
-            return Row(
-              children: row.map((column) {
-                return Container(
-                  height: EmojiCharacter._size,
-                  width: EmojiCharacter._size,
-//                  color: column ? Colors.orange : null,
-                  child: column ? FittedBox(child: Text(emojis.emoji)) : null,
-                );
-              }).toList(),
-            );
-          },
-        ).toList(),
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 5,
+        children: temp,
       ),
     );
   }

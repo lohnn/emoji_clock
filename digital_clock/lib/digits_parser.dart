@@ -17,6 +17,9 @@ class DigitsParser {
 class Character {
   final Iterable<Iterable<bool>> pixelPlacement;
 
+  Iterable<bool> get singleIterablePixelPlacement =>
+      pixelPlacement.expand((list) => list);
+
   Character._(this.pixelPlacement);
 
   static Map<String, Character> parseDigitMatrix(
