@@ -7,7 +7,6 @@ import 'dart:async';
 import 'package:digital_clock/emoji_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 enum _Element {
@@ -101,19 +100,6 @@ class _DigitalClockState extends State<DigitalClock> {
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
     final second = DateFormat('ss').format(_dateTime);
-    final fontSize = MediaQuery.of(context).size.width / 3.5;
-    final offset = -fontSize / 7;
-    final defaultStyle = GoogleFonts.abel().copyWith(
-      color: colors[_Element.text],
-      fontSize: fontSize,
-      shadows: [
-        Shadow(
-          blurRadius: 0,
-          color: colors[_Element.shadow],
-          offset: Offset(10, 0),
-        ),
-      ],
-    );
 
     return Container(
       color: colors[_Element.background],
