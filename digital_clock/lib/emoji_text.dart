@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 class EmojiCharacter extends StatefulWidget {
   final String charString;
-  static const _size = 20.0;
 
   EmojiCharacter(this.charString, {Key key}) : super(key: key);
 
@@ -43,8 +42,6 @@ class _EmojiCharacterState extends State<EmojiCharacter> {
         Provider.of<DigitsParser>(context).charOf(widget.charString);
     final temp = character.singleIterablePixelPlacement.map((pixel) {
       return Container(
-        height: EmojiCharacter._size,
-        width: EmojiCharacter._size,
         child: pixel ? FittedBox(child: Text(emojis.emoji)) : null,
       );
     }).toList();
