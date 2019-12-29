@@ -28,15 +28,18 @@ class _EmojiPixelState extends State<EmojiPixel> {
   void didUpdateWidget(EmojiPixel oldWidget) {
     super.didUpdateWidget(oldWidget);
     visible = widget.visible;
-    if (visible != oldWidget.visible) {
+    if (visible && visible != oldWidget.visible) {
       currentEmoji = emojis.emoji;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: widget.visible ? FittedBox(child: Text(currentEmoji)) : null,
+    return AnimatedOpacity(
+      opacity: visible ? 1 : 0,
+      duration: Duration(seconds: 1),
+      curve: Curves.easeInOutSine,
+      child: Container(child: FittedBox(child: Text(currentEmoji))),
     );
   }
 }
