@@ -55,6 +55,19 @@ class Character {
           ),
         ),
       ),
+    )..putIfAbsent("",
+        () => Character.empty(width: characterWidth, height: characterHeight));
+  }
+
+  static Character empty({int width, int height}) {
+    return Character._(
+      List.generate(
+        height,
+        (y) => List.generate(
+          width,
+          (x) => false,
+        ),
+      ),
     );
   }
 

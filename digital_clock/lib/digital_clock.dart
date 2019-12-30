@@ -101,6 +101,8 @@ class _DigitalClockState extends State<DigitalClock> {
     final minute = DateFormat('mm').format(_dateTime);
     final second = DateFormat('ss').format(_dateTime);
 
+    final separatorText = _dateTime.second % 3 > 0 ? ":" : "";
+
     return Container(
       color: colors[_Element.background],
       child: Row(
@@ -114,7 +116,7 @@ class _DigitalClockState extends State<DigitalClock> {
             child: EmojiCharacter(hour.substring(1, 2), key: Key("hour2")),
           ),
           const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(child: EmojiCharacter(":", key: Key("colon"))),
+          Flexible(child: EmojiCharacter(separatorText, key: Key("colon"))),
           const Padding(padding: EdgeInsets.only(left: 10)),
           Flexible(
             child: EmojiCharacter(minute.substring(0, 1), key: Key("minute1")),
@@ -124,7 +126,7 @@ class _DigitalClockState extends State<DigitalClock> {
             child: EmojiCharacter(minute.substring(1, 2), key: Key("minute2")),
           ),
           const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(child: EmojiCharacter(":", key: Key("colon"))),
+          Flexible(child: EmojiCharacter(separatorText, key: Key("colon"))),
           const Padding(padding: EdgeInsets.only(left: 10)),
           Flexible(
             child: EmojiCharacter(second.substring(0, 1), key: Key("second1")),
