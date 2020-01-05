@@ -83,37 +83,55 @@ class _DigitalClockState extends State<DigitalClock> {
 
     return Container(
       color: backgroundColor,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Flexible(
-            child: EmojiCharacter(hour.substring(0, 1), key: Key("hour1")),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(
-            child: EmojiCharacter(hour.substring(1, 2), key: Key("hour2")),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(child: EmojiCharacter(separatorText, key: Key("colon1"))),
-          const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(
-            child: EmojiCharacter(minute.substring(0, 1), key: Key("minute1")),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(
-            child: EmojiCharacter(minute.substring(1, 2), key: Key("minute2")),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(child: EmojiCharacter(separatorText, key: Key("colon2"))),
-          const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(
-            child: EmojiCharacter(second.substring(0, 1), key: Key("second1")),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(
-            child: EmojiCharacter(second.substring(1, 2), key: Key("second2")),
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Flexible(
+              child: EmojiCharacter(hour.substring(0, 1), key: Key("hour1")),
+            ),
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Flexible(
+              child: EmojiCharacter(
+                hour.substring(1, 2),
+                key: Key("hour2"),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Flexible(child: EmojiCharacter(separatorText, key: Key("colon1"))),
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Flexible(
+              child: EmojiCharacter(
+                minute.substring(0, 1),
+                key: Key("minute1"),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Flexible(
+              child: EmojiCharacter(
+                minute.substring(1, 2),
+                key: Key("minute2"),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Flexible(child: EmojiCharacter(separatorText, key: Key("colon2"))),
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Flexible(
+              child: EmojiCharacter(
+                second.substring(0, 1),
+                key: Key("second1"),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Flexible(
+              child: EmojiCharacter(
+                second.substring(1, 2),
+                key: Key("second2"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
