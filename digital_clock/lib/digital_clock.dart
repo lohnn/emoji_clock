@@ -115,21 +115,6 @@ class _DigitalClockState extends State<DigitalClock> {
               ),
             ),
             const Padding(padding: EdgeInsets.only(left: 10)),
-            Flexible(child: EmojiCharacter(separatorText, key: Key("colon2"))),
-            const Padding(padding: EdgeInsets.only(left: 10)),
-            Flexible(
-              child: EmojiCharacter(
-                second.substring(0, 1),
-                key: Key("second1"),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(left: 10)),
-            Flexible(
-              child: EmojiCharacter(
-                second.substring(1, 2),
-                key: Key("second2"),
-              ),
-            ),
           ],
         ),
       ),
