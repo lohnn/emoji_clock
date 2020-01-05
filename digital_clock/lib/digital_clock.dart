@@ -9,23 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:intl/intl.dart';
 
-enum _Element {
-  background,
-  text,
-  shadow,
-}
+final _lightBackground = Color(0xFFF9F8F0);
 
-final _lightTheme = {
-  _Element.background: Color(0xFF81B3FE),
-  _Element.text: Colors.white,
-  _Element.shadow: Colors.black,
-};
-
-final _darkTheme = {
-  _Element.background: Colors.black,
-  _Element.text: Colors.white,
-  _Element.shadow: Color(0xFF174EA6),
-};
+final _darkBackground = Colors.black;
 
 class DigitalClock extends StatefulWidget {
   const DigitalClock(this.model);
@@ -74,14 +60,6 @@ class _DigitalClockState extends State<DigitalClock> {
   void _updateTime() {
     setState(() {
       _dateTime = DateTime.now();
-      // Update once per minute. If you want to update every second, use the
-      // following code.
-//      _timer = Timer(
-//        Duration(minutes: 1) -
-//            Duration(seconds: _dateTime.second) -
-//            Duration(milliseconds: _dateTime.millisecond),
-//        _updateTime,
-//      );
       // Update once per second, but make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
       _timer = Timer(
@@ -93,9 +71,9 @@ class _DigitalClockState extends State<DigitalClock> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).brightness == Brightness.light
-        ? _lightTheme
-        : _darkTheme;
+    final backgroundColor = Theme.of(context).brightness == Brightness.light
+        ? _lightBackground
+        : _darkBackground;
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
@@ -104,7 +82,7 @@ class _DigitalClockState extends State<DigitalClock> {
     final separatorText = _dateTime.second % 3 > 0 ? ":" : "";
 
     return Container(
-      color: colors[_Element.background],
+      color: backgroundColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -116,7 +94,7 @@ class _DigitalClockState extends State<DigitalClock> {
             child: EmojiCharacter(hour.substring(1, 2), key: Key("hour2")),
           ),
           const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(child: EmojiCharacter(separatorText, key: Key("colon"))),
+          Flexible(child: EmojiCharacter(separatorText, key: Key("colon1"))),
           const Padding(padding: EdgeInsets.only(left: 10)),
           Flexible(
             child: EmojiCharacter(minute.substring(0, 1), key: Key("minute1")),
@@ -126,7 +104,7 @@ class _DigitalClockState extends State<DigitalClock> {
             child: EmojiCharacter(minute.substring(1, 2), key: Key("minute2")),
           ),
           const Padding(padding: EdgeInsets.only(left: 10)),
-          Flexible(child: EmojiCharacter(separatorText, key: Key("colon"))),
+          Flexible(child: EmojiCharacter(separatorText, key: Key("colon2"))),
           const Padding(padding: EdgeInsets.only(left: 10)),
           Flexible(
             child: EmojiCharacter(second.substring(0, 1), key: Key("second1")),
