@@ -76,47 +76,47 @@ class _DigitalClockState extends State<DigitalClock> {
         : _darkBackground;
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
+    final amPm =
+        !widget.model.is24HourFormat ? DateFormat('a').format(_dateTime) : null;
     final minute = DateFormat('mm').format(_dateTime);
-    final second = DateFormat('ss').format(_dateTime);
 
     final separatorText = _dateTime.second % 3 > 0 ? ":" : "";
 
     return Container(
       color: backgroundColor,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          Flexible(
+            child: EmojiCharacter(hour.substring(0, 1), key: Key("hour1")),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          Flexible(
+            child: EmojiCharacter(hour.substring(1, 2), key: Key("hour2")),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          Flexible(child: EmojiCharacter(separatorText, key: Key("colon1"))),
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          Flexible(
+            child: EmojiCharacter(minute.substring(0, 1), key: Key("minute1")),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          Flexible(
+            child: EmojiCharacter(minute.substring(1, 2), key: Key("minute2")),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 10)),
+          if (amPm != null) ...[
             Flexible(
-              child: EmojiCharacter(hour.substring(0, 1), key: Key("hour1")),
+              child: EmojiCharacter(amPm.substring(0, 1), key: Key("AP")),
             ),
             const Padding(padding: EdgeInsets.only(left: 10)),
             Flexible(
-              child: EmojiCharacter(
-                hour.substring(1, 2),
-                key: Key("hour2"),
-              ),
+              child: EmojiCharacter(amPm.substring(1, 2), key: Key("M")),
             ),
             const Padding(padding: EdgeInsets.only(left: 10)),
-            Flexible(child: EmojiCharacter(separatorText, key: Key("colon1"))),
-            const Padding(padding: EdgeInsets.only(left: 10)),
-            Flexible(
-              child: EmojiCharacter(
-                minute.substring(0, 1),
-                key: Key("minute1"),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(left: 10)),
-            Flexible(
-              child: EmojiCharacter(
-                minute.substring(1, 2),
-                key: Key("minute2"),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(left: 10)),
-          ],
-        ),
+          ]
+        ],
       ),
     );
   }
