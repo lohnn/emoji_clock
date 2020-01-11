@@ -8,10 +8,31 @@ import 'package:digital_clock/emoji_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import 'digits_parser.dart';
+import 'emojis.dart';
 
 const _lightBackground = Color(0xFFF9F8F0);
 
 const _darkBackground = Colors.black;
+
+class ThisClockYo extends StatelessWidget {
+  final ClockModel model;
+
+  const ThisClockYo(this.model, {Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: <Provider>[
+        Provider<CharParser>(create: (_) => CharParser()),
+        Provider<Emojis>(create: (_) => Emojis()),
+      ],
+      child: EmojiClock(model),
+    );
+  }
+}
 
 /// A digital clock where the pixels of the digits consists of emojis.
 class EmojiClock extends StatefulWidget {
