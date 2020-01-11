@@ -14,13 +14,12 @@ import 'digits_parser.dart';
 import 'emojis.dart';
 
 const _lightBackground = Color(0xFFF9F8F0);
-
 const _darkBackground = Colors.black;
 
-class ThisClockYo extends StatelessWidget {
+class EmojiClock extends StatelessWidget {
   final ClockModel model;
 
-  const ThisClockYo(this.model, {Key key}) : super(key: key);
+  const EmojiClock(this.model, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +28,22 @@ class ThisClockYo extends StatelessWidget {
         Provider<CharParser>(create: (_) => CharParser()),
         Provider<Emojis>(create: (_) => Emojis()),
       ],
-      child: EmojiClock(model),
+      child: _EmojiClockFace(model),
     );
   }
 }
 
 /// A digital clock where the pixels of the digits consists of emojis.
-class EmojiClock extends StatefulWidget {
-  const EmojiClock(this.model);
+class _EmojiClockFace extends StatefulWidget {
+  const _EmojiClockFace(this.model);
 
   final ClockModel model;
 
   @override
-  _EmojiClockState createState() => _EmojiClockState();
+  _EmojiClockFaceState createState() => _EmojiClockFaceState();
 }
 
-class _EmojiClockState extends State<EmojiClock> {
+class _EmojiClockFaceState extends State<_EmojiClockFace> {
   DateTime _dateTime = DateTime.now();
   Timer _timer;
 
@@ -57,7 +56,7 @@ class _EmojiClockState extends State<EmojiClock> {
   }
 
   @override
-  void didUpdateWidget(EmojiClock oldWidget) {
+  void didUpdateWidget(_EmojiClockFace oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.model != oldWidget.model) {
       oldWidget.model.removeListener(_updateModel);

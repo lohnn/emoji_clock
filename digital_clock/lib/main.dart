@@ -31,6 +31,6 @@ void main() {
 class ClockApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ClockCustomizer((ClockModel model) => ThisClockYo(model));
+    return ClockCustomizer((ClockModel model) => EmojiClock(model));
   }
 }
