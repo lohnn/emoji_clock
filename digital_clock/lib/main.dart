@@ -12,7 +12,7 @@ import 'package:flutter_clock_helper/customizer.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:provider/provider.dart';
 
-import 'digital_clock.dart';
+import 'emoji_clock.dart';
 
 void main() {
   if (!kIsWeb && Platform.isMacOS) {
@@ -27,7 +27,7 @@ void main() {
   // For more information, see the flutter_clock_helper package.
   //
   // Your job is to edit [DigitalClock], or replace it with your
-  // own clock widget. (Look in digital_clock.dart for more details!)
+  // own clock widget. (Look in emoji_clock.dart for more details!)
   runApp(ClockApp());
 }
 
@@ -36,10 +36,10 @@ class ClockApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: <Provider>[
-        Provider<DigitsParser>(create: (_) => DigitsParser()),
+        Provider<CharParser>(create: (_) => CharParser()),
         Provider<Emojis>(create: (_) => Emojis()),
       ],
-      child: ClockCustomizer((ClockModel model) => DigitalClock(model)),
+      child: ClockCustomizer((ClockModel model) => EmojiClock(model)),
     );
   }
 }

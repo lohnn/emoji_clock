@@ -13,16 +13,17 @@ const _lightBackground = Color(0xFFF9F8F0);
 
 const _darkBackground = Colors.black;
 
-class DigitalClock extends StatefulWidget {
-  const DigitalClock(this.model);
+/// A digital clock where the pixels of the digits consists of emojis.
+class EmojiClock extends StatefulWidget {
+  const EmojiClock(this.model);
 
   final ClockModel model;
 
   @override
-  _DigitalClockState createState() => _DigitalClockState();
+  _EmojiClockState createState() => _EmojiClockState();
 }
 
-class _DigitalClockState extends State<DigitalClock> {
+class _EmojiClockState extends State<EmojiClock> {
   DateTime _dateTime = DateTime.now();
   Timer _timer;
 
@@ -35,7 +36,7 @@ class _DigitalClockState extends State<DigitalClock> {
   }
 
   @override
-  void didUpdateWidget(DigitalClock oldWidget) {
+  void didUpdateWidget(EmojiClock oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.model != oldWidget.model) {
       oldWidget.model.removeListener(_updateModel);

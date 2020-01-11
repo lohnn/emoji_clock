@@ -3,6 +3,9 @@ import 'package:digital_clock/emoji_pixel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// Visual representation of a [Character] consisting of emojis.
+///
+/// The pixels are mapped to emojis using [EmojiPixel]
 class EmojiCharacter extends StatefulWidget {
   final String charString;
 
@@ -38,7 +41,7 @@ class _EmojiCharacterState extends State<EmojiCharacter> {
 
   Widget createTree() {
     final character =
-        Provider.of<DigitsParser>(context).charOf(widget.charString);
+        Provider.of<CharParser>(context).charOf(widget.charString);
     return Container(
       child: GridView.count(
         shrinkWrap: true,

@@ -1,18 +1,26 @@
-class DigitsParser {
+/// Parses characters and provides them with [charOf].
+class CharParser {
   Map<String, Character> _digits;
 
-  DigitsParser() {
+  CharParser() {
     final newLinePos = _digitsString.indexOf("\n");
     final letterMap = _digitsString.substring(0, newLinePos);
     final pixelMap = _digitsString.substring(newLinePos + 1);
     _digits = Character._parseDigitMatrix(letterMap, pixelMap);
   }
 
+  /// Gets a character from the map of supported characters.
+  ///
+  /// If character does not exist, null will be returned.
   Character charOf(String char) {
     return _digits[char];
   }
 }
 
+/// Pixel representation of a character.
+///
+/// [_pixelPlacement] is used as a matrix for pixel locations where boolean
+/// value true means visible and false means invisible.
 class Character {
   final Iterable<Iterable<bool>> _pixelPlacement;
 
@@ -43,7 +51,7 @@ class Character {
         letterMap.length,
         (index) => MapEntry(
           letterMap[index],
-          Character._fromMatrix(
+          Character._fromStringMatrix(
             rows.sublist(
               index * characterHeight,
               (index + 1) * characterHeight,
@@ -72,7 +80,7 @@ class Character {
     );
   }
 
-  factory Character._fromMatrix(
+  factory Character._fromStringMatrix(
     List<String> characterPixels,
     String pixelCharacter,
     int characterWidth,

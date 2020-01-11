@@ -1,7 +1,12 @@
+import 'package:digital_clock/emoji_text.dart';
 import 'package:digital_clock/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// One pixel for use in a [EmojiCharacter].
+///
+/// Will display an emoji that, each time it turns from invisible to visible
+/// will display a new emoji.
 class EmojiPixel extends StatefulWidget {
   final bool visible;
 
