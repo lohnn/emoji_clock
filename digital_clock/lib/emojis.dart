@@ -13,11 +13,16 @@ class Emojis {
   final List<String> _emojis;
   int _currentPosition = 0;
 
-  Emojis() : _emojis = _emojisList..shuffle();
+  Emojis() : _emojis = _emojisList {
+    _emojis..shuffle();
+  }
 
   String get emoji {
     _currentPosition++;
-    if (_currentPosition >= _emojis.length) _currentPosition = 0;
+    if (_currentPosition >= _emojis.length) {
+      _currentPosition = 0;
+      _emojis..shuffle();
+    }
     return _emojis.elementAt(_currentPosition);
   }
 }
