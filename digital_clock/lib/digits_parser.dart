@@ -2,11 +2,10 @@ class DigitsParser {
   Map<String, Character> _digits;
 
   DigitsParser() {
-//    final digits = await rootBundle.loadString("assets/digits");
-    final newLinePos = digits.indexOf("\n");
-    final letterMap = digits.substring(0, newLinePos);
-    final pixelMap = digits.substring(newLinePos + 1);
-    _digits = Character.parseDigitMatrix(letterMap, pixelMap);
+    final newLinePos = _digitsString.indexOf("\n");
+    final letterMap = _digitsString.substring(0, newLinePos);
+    final pixelMap = _digitsString.substring(newLinePos + 1);
+    _digits = Character._parseDigitMatrix(letterMap, pixelMap);
   }
 
   Character charOf(String char) {
@@ -15,16 +14,16 @@ class DigitsParser {
 }
 
 class Character {
-  final Iterable<Iterable<bool>> pixelPlacement;
+  final Iterable<Iterable<bool>> _pixelPlacement;
 
-  int get width => pixelPlacement.elementAt(0).length;
+  int get width => _pixelPlacement.elementAt(0).length;
 
   Iterable<bool> get singleIterablePixelPlacement =>
-      pixelPlacement.expand((list) => list);
+      _pixelPlacement.expand((list) => list);
 
-  Character._(this.pixelPlacement);
+  Character._(this._pixelPlacement);
 
-  static Map<String, Character> parseDigitMatrix(
+  static Map<String, Character> _parseDigitMatrix(
     String letterMap,
     String pixelMap, {
     String pixelCharacter = "#",
@@ -44,7 +43,7 @@ class Character {
         letterMap.length,
         (index) => MapEntry(
           letterMap[index],
-          Character.fromMatrix(
+          Character._fromMatrix(
             rows.sublist(
               index * characterHeight,
               (index + 1) * characterHeight,
@@ -55,11 +54,13 @@ class Character {
           ),
         ),
       ),
-    )..putIfAbsent("",
-        () => Character.empty(width: characterWidth, height: characterHeight));
+    )..putIfAbsent(
+        "",
+        () => Character._createEmptyCharacter(
+            width: characterWidth, height: characterHeight));
   }
 
-  static Character empty({int width, int height}) {
+  static Character _createEmptyCharacter({int width, int height}) {
     return Character._(
       List.generate(
         height,
@@ -71,7 +72,7 @@ class Character {
     );
   }
 
-  factory Character.fromMatrix(
+  factory Character._fromMatrix(
     List<String> characterPixels,
     String pixelCharacter,
     int characterWidth,
@@ -95,7 +96,7 @@ class Character {
   }
 }
 
-const digits = """0123456789:PAM
+const _digitsString = """0123456789:PAM
  ###
 #   #
 #   #
