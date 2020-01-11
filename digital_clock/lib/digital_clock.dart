@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:intl/intl.dart';
 
-final _lightBackground = Color(0xFFF9F8F0);
+const _lightBackground = Color(0xFFF9F8F0);
 
-final _darkBackground = Colors.black;
+const _darkBackground = Colors.black;
 
 class DigitalClock extends StatefulWidget {
   const DigitalClock(this.model);
