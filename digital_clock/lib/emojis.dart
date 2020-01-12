@@ -31,4 +31,8 @@ class Emojis {
     }
     return _emojis.elementAt(_currentPosition);
   }
+
+  Future<Emojis> init() async {
+    return Emojis();
+  }
 }

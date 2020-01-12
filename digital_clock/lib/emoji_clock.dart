@@ -16,6 +16,28 @@ import 'emojis.dart';
 const _lightBackground = Color(0xFFF9F8F0);
 const _darkBackground = Colors.black;
 
+class ClockInit {
+  final CharParser charParser;
+  final Emojis emojis;
+
+  ClockInit._(this.charParser, this.emojis);
+
+  static Future<ClockInit> init() async {
+    final clockInit = ClockInit._(CharParser(), Emojis());
+    await Future.wait(
+      [
+        clockInit.charParser.init(),
+        clockInit.emojis.init(),
+      ],
+    );
+    return clockInit;
+  }
+}
+
+/// A digital clock where the pixels of the digits consists of emojis.
+///
+/// This widget is for initializing the parsers and making sure everything is
+/// loaded before showing the clock face.
 class EmojiClock extends StatelessWidget {
   final ClockModel model;
 
@@ -23,17 +45,29 @@ class EmojiClock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: <Provider>[
-        Provider<CharParser>(create: (_) => CharParser()),
-        Provider<Emojis>(create: (_) => Emojis()),
-      ],
-      child: _EmojiClockFace(model),
+    return FutureProvider<ClockInit>(
+      create: (_) => ClockInit.init(),
+      child: Consumer<ClockInit>(
+        builder: (context, value, child) {
+          return AnimatedSwitcher(
+            duration: Duration(seconds: 3),
+            child: value != null
+                ? MultiProvider(
+                    providers: <Provider>[
+                      Provider<CharParser>.value(value: value.charParser),
+                      Provider<Emojis>.value(value: value.emojis),
+                    ],
+                    child: _EmojiClockFace(model),
+                  )
+                : Container(color: _darkBackground),
+          );
+        },
+      ),
     );
   }
 }
 
-/// A digital clock where the pixels of the digits consists of emojis.
+/// Actual implementation of the clock face.
 class _EmojiClockFace extends StatefulWidget {
   const _EmojiClockFace(this.model);
 

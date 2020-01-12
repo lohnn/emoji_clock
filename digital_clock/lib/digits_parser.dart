@@ -15,6 +15,10 @@ class CharParser {
   Character charOf(String char) {
     return _digits[char];
   }
+
+  Future<CharParser> init() async {
+    return CharParser();
+  }
 }
 
 /// Pixel representation of a character.
