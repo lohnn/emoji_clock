@@ -11,7 +11,7 @@ class ClockInit {
   ClockInit._(this.charParser, this.emojis);
 
   static Future<ClockInit> init() async {
-    final init =  await Future.wait(
+    final init = await Future.wait(
       [
         CharParser.init(),
         Emojis.init(),

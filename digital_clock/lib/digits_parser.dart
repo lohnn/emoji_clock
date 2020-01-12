@@ -23,7 +23,8 @@ class CharParser {
     return CharParser._(digits);
   }
 
-  static Future<String> _getDefaultDigitMapFromAssets() => rootBundle.loadString("assets/digits");
+  static Future<String> _getDefaultDigitMapFromAssets() =>
+      rootBundle.loadString("assets/digits");
 }
 
 /// Pixel representation of a character.
