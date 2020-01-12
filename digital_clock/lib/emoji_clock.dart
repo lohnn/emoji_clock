@@ -104,6 +104,7 @@ class _EmojiClockFaceState extends State<_EmojiClockFace> {
     final separatorText = _dateTime.second % 3 > 0 ? ":" : "";
 
     return Container(
+      constraints: BoxConstraints.expand(),
       color: backgroundColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
