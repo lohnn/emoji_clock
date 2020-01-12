@@ -1,15 +1,13 @@
-# Flutter Clock
+# Emoji Clock
 
-Welcome to Flutter Clock!
+Welcome to Emoji Clock!
 
-See [flutter.dev/clock](https://flutter.dev/clock) for how to get started, submission requirements, contest rules, and FAQs.
+<img src='digital_clock/emoji_clock.png' width='350'>
 
-See a [live demo](https://maryx.github.io/flutter_clock) with Flutter for Web!
+This is Johannes Löhnn's submission for the Flutter clock challenge. For more information, see:
 
-Example [Analog Clock](analog_clock)
+* [flutter.dev/clock](https://flutter.dev/clock) for how to get started, submission requirements, contest rules, and FAQs.
 
-<img src='analog_clock/analog.gif' width='350'>
+* [live demo](https://maryx.github.io/flutter_clock) with Flutter for Web!
 
-Example [Digital Clock](digital_clock)
-
-<img src='digital_clock/digital.gif' width='350'>
+Best experience will be running the clock in Android, as it was developed using an Android device.
