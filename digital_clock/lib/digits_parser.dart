@@ -1,11 +1,13 @@
+import 'package:flutter/services.dart';
+
 /// Parses characters and provides them with [charOf].
 class CharParser {
   Map<String, Character> _digits;
 
-  CharParser._() {
-    final newLinePos = _digitsString.indexOf("\n");
-    final letterMap = _digitsString.substring(0, newLinePos);
-    final pixelMap = _digitsString.substring(newLinePos + 1);
+  CharParser._(String digits) {
+    final newLinePos = digits.indexOf("\n");
+    final letterMap = digits.substring(0, newLinePos);
+    final pixelMap = digits.substring(newLinePos + 1);
     _digits = Character._parseDigitMatrix(letterMap, pixelMap);
   }
 
@@ -17,8 +19,11 @@ class CharParser {
   }
 
   static Future<CharParser> init() async {
-    return CharParser._();
+    final digits = await _getDefaultDigitMapFromAssets();
+    return CharParser._(digits);
   }
+
+  static Future<String> _getDefaultDigitMapFromAssets() => rootBundle.loadString("assets/digits");
 }
 
 /// Pixel representation of a character.
@@ -107,103 +112,3 @@ class Character {
     );
   }
 }
-
-const _digitsString = """0123456789:PAM
- ###
-#   #
-#   #
-#   #
-#   #
-#   #
- ###
-  #
-###
-  #
-  #
-  #
-  #
-#####
- ###
-#   #
-   #
-  #
- #
-#
-#####
- ###
-#   #
-    #
-  ##
-    #
-#   #
- ###
-#
-#
-#
-# #
-#####
-  #
-  #
-#####
-#
-#
-####
-    #
-    #
-####
- ###
-#   #
-#
-####
-#   #
-#   #
- ###
-#####
-    #
-   #
-  #
-  #
-  #
-  #
- ###
-#   #
-#   #
- ###
-#   #
-#   #
- ###
- ###
-#   #
-#   #
- ####
-    #
-#   #
- ###
-
-
-  #
-
-  #
-
-
-####
-#   #
-#   #
-####
-#
-#
-#
- ###
-#   #
-#   #
-#####
-#   #
-#   #
-#   #
- # #
-# # #
-# # #
-# # #
-# # #
-#   #
-#   #""";
