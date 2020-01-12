@@ -11,3 +11,21 @@ This is Johannes Löhnn's submission for the Flutter clock challenge. For more i
 * [live demo](https://maryx.github.io/flutter_clock) with Flutter for Web!
 
 Best experience will be running the clock in Android, as it was developed using an Android device.
+
+### How tu run
+
+In terminal, navigate into the directory digital_clock
+
+```
+$ cd digital_clock
+```
+
+Then make sure to initialize the project
+```
+$ flutter create . 
+```
+
+After that, you shuold be able to just build and run it
+```
+$ flutter run
+```
