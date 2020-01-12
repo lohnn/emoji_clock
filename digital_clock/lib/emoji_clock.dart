@@ -30,16 +30,17 @@ class EmojiClock extends StatelessWidget {
     return FutureProvider<ClockInit>(
       create: (_) => ClockInit.init(),
       child: Consumer<ClockInit>(
-        builder: (context, value, child) {
+        child: _EmojiClockFace(model),
+        builder: (_, clockInit, clockFace) {
           return AnimatedSwitcher(
             duration: Duration(seconds: 3),
-            child: value != null
+            child: clockInit != null
                 ? MultiProvider(
                     providers: <Provider>[
-                      Provider<CharParser>.value(value: value.charParser),
-                      Provider<Emojis>.value(value: value.emojis),
+                      Provider<CharParser>.value(value: clockInit.charParser),
+                      Provider<Emojis>.value(value: clockInit.emojis),
                     ],
-                    child: _EmojiClockFace(model),
+                    child: clockFace,
                   )
                 : Container(color: _darkBackground),
           );
