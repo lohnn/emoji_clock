@@ -2,7 +2,7 @@
 class CharParser {
   Map<String, Character> _digits;
 
-  CharParser() {
+  CharParser._() {
     final newLinePos = _digitsString.indexOf("\n");
     final letterMap = _digitsString.substring(0, newLinePos);
     final pixelMap = _digitsString.substring(newLinePos + 1);
@@ -16,8 +16,8 @@ class CharParser {
     return _digits[char];
   }
 
-  Future<CharParser> init() async {
-    return CharParser();
+  static Future<CharParser> init() async {
+    return CharParser._();
   }
 }
 

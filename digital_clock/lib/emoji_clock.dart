@@ -4,35 +4,17 @@
 
 import 'dart:async';
 
+import 'package:digital_clock/clock_init.dart';
+import 'package:digital_clock/digits_parser.dart';
 import 'package:digital_clock/emoji_text.dart';
+import 'package:digital_clock/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'digits_parser.dart';
-import 'emojis.dart';
-
 const _lightBackground = Color(0xFFF9F8F0);
 const _darkBackground = Colors.black;
-
-class ClockInit {
-  final CharParser charParser;
-  final Emojis emojis;
-
-  ClockInit._(this.charParser, this.emojis);
-
-  static Future<ClockInit> init() async {
-    final clockInit = ClockInit._(CharParser(), Emojis());
-    await Future.wait(
-      [
-        clockInit.charParser.init(),
-        clockInit.emojis.init(),
-      ],
-    );
-    return clockInit;
-  }
-}
 
 /// A digital clock where the pixels of the digits consists of emojis.
 ///
