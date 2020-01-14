@@ -1,4 +1,4 @@
-import 'package:digital_clock/emoji_text.dart';
+import 'package:digital_clock/emoji_character.dart';
 import 'package:digital_clock/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

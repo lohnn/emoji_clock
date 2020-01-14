@@ -6,7 +6,7 @@ import 'dart:async';
 
 import 'package:digital_clock/clock_init.dart';
 import 'package:digital_clock/digits_parser.dart';
-import 'package:digital_clock/emoji_text.dart';
+import 'package:digital_clock/emoji_character.dart';
 import 'package:digital_clock/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
