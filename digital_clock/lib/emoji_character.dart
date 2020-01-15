@@ -46,7 +46,7 @@ class _EmojiCharacterState extends State<EmojiCharacter> {
       child: GridView.count(
         shrinkWrap: true,
         crossAxisCount: character.width,
-        children: character.singleIterablePixelPlacement
+        children: character.pixelPlacement
             .map((pixelVisibility) => EmojiPixel(pixelVisibility))
             .toList(),
       ),

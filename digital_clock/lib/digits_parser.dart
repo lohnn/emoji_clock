@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 /// Parses characters and provides them with [charOf].
@@ -29,17 +30,14 @@ class CharParser {
 
 /// Pixel representation of a character.
 ///
-/// [_pixelPlacement] is used as a matrix for pixel locations where boolean
-/// value true means visible and false means invisible.
+/// [pixelPlacement] is used as a squashed out matrix for pixel locations where
+/// boolean value true means visible and false means invisible.
 class Character {
-  final Iterable<Iterable<bool>> _pixelPlacement;
+  final Iterable<bool> pixelPlacement;
+  final int width;
+  final int height;
 
-  int get width => _pixelPlacement.elementAt(0).length;
-
-  Iterable<bool> get singleIterablePixelPlacement =>
-      _pixelPlacement.expand((list) => list);
-
-  Character._(this._pixelPlacement);
+  Character._(this.pixelPlacement, this.width, this.height);
 
   static Map<String, Character> _parseDigitMatrix(
     String letterMap,
@@ -75,18 +73,20 @@ class Character {
     )..putIfAbsent(
         "",
         () => Character._createEmptyCharacter(
-            width: characterWidth, height: characterHeight));
+            width: characterWidth, height: characterHeight),
+      );
   }
 
-  static Character _createEmptyCharacter({int width, int height}) {
+  static Character _createEmptyCharacter({
+    @required int width,
+    @required int height,
+  }) {
+    assert(width != null);
+    assert(height != null);
     return Character._(
-      List.generate(
-        height,
-        (y) => List.generate(
-          width,
-          (x) => false,
-        ),
-      ),
+      List.generate(height * width, (_) => false),
+      width,
+      height,
     );
   }
 
@@ -99,17 +99,18 @@ class Character {
     final pixelCharIndex = pixelCharacter.codeUnitAt(0);
     return Character._(
       List.generate(
-        characterHeight,
-        (y) => List.generate(
-          characterWidth,
-          (x) {
-            final pixelRow = characterPixels[y];
-            return x >= pixelRow.length
-                ? false
-                : pixelRow.codeUnitAt(x) == pixelCharIndex;
-          },
-        ),
+        characterHeight * characterWidth,
+        (index) {
+          final x = index % characterWidth;
+          final y = (index / characterWidth).floor();
+          final pixelRow = characterPixels[y];
+          return x >= pixelRow.length
+              ? false
+              : pixelRow.codeUnitAt(x) == pixelCharIndex;
+        },
       ),
+      characterWidth,
+      characterHeight,
     );
   }
 }
