@@ -44,7 +44,7 @@ class _EmojiPixelState extends State<EmojiPixel> {
       opacity: visible ? 1 : 0,
       duration: Duration(seconds: 1),
       curve: Curves.easeInOutSine,
-      child: Container(child: FittedBox(child: Text(currentEmoji))),
+      child: FittedBox(child: Text(currentEmoji)),
     );
   }
 }
